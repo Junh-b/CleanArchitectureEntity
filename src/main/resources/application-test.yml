@@ -1,0 +1,7 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    mapping-resources:
+      hbm/Book.hbm.xml
+
