@@ -5,9 +5,7 @@ import net.junhabaek.cleanarchitectureentity.domain.Money;
 import net.junhabaek.cleanarchitectureentity.domain.Page;
 import net.junhabaek.cleanarchitectureentity.domain.Quantity;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
 
 import javax.persistence.EntityManager;
@@ -18,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ActiveProfiles("test")
 @DataJpaTest
-public class BookRepositoryTest {
+public class BookPersistenceTest {
 
     @PersistenceContext
     EntityManager em;
