@@ -13,7 +13,7 @@ public class Money {
     public final static Money ZERO = Money.of(0L);
 
     @Getter
-    private BigInteger amount;
+    private final BigInteger amount;
 
     public Money getZERO() {
         return ZERO;
