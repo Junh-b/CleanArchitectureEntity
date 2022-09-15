@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,22 +20,43 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DataJpaTest
 public class BookRepositoryTest {
 
-    @Autowired
-    private BookRepository bookRepository;
+    @PersistenceContext
+    EntityManager em;
+
+    private Book createBasicBook(){
+        return Book.createNewBook("my_book", "my_author", Money.ZERO, Quantity.ZERO,
+                Page.of(1L));
+    }
 
     @Transactional
     @Test
-    void givenValidBookObjectWithoutID_whenSaveToRepository_thenItShouldAssignIDToEntity() {
+    void givenValidBookObjectWithoutID_whenPersist_thenItShouldAssignIDToEntity() {
         //given
-        Book book = Book.createNewBook("my_book", "my_author", Money.ZERO, Quantity.ZERO,
-                Page.of(1L));
+        Book book = createBasicBook();
 
         //when
-        bookRepository.save(book);
+        em.persist(book);
 
         //then
         assertNotNull(book.getId());
         //System.out.println(book.getId());
         // 1
+    }
+
+    @Transactional
+    @Test
+    void givenSavedBookObject_whenFindIt_thenItShouldHaveNonNullAttributes() {
+        //given
+        Book book = createBasicBook();
+        em.persist(book);
+        Long bookId = book.getId();
+        em.flush();
+        em.clear();
+
+        //when
+        Book foundBook = em.find(Book.class, bookId);
+
+        //then
+        assertNotNull(foundBook.getBookName());
     }
 }
