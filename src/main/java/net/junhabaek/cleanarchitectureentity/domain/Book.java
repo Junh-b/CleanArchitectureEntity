@@ -2,13 +2,15 @@ package net.junhabaek.cleanarchitectureentity.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter(value = AccessLevel.PRIVATE)
+@Setter(value = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Book {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +23,11 @@ public class Book {
     @Embedded
     private Page page;
 
-    public static Book createNewBook(String bookName, String authorName, Money price, Quantity quantity, Page page){
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Publisher publisher;
+
+    public static Book createNewBook(String bookName, String authorName, Money price, Quantity quantity, Page page,
+                                     Publisher publisher){
         Book book = new Book();
 
         book.setBookName(bookName);
@@ -29,6 +35,7 @@ public class Book {
         book.setPrice(price);
         book.setQuantity(quantity);
         book.setPage(page);
+        book.setPublisher(publisher);
 
         //can emit domain event here
 
