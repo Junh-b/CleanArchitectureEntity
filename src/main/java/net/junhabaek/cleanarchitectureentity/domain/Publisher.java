@@ -8,31 +8,20 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Access(value = AccessType.PROPERTY)
-@Setter(value=AccessLevel.PUBLIC) @NoArgsConstructor(access = AccessLevel.PUBLIC)
+@Access(value = AccessType.FIELD)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Publisher {
-    Long id;
+    @Id @Column(name="publisher_id")
+    private Long id;
 
-    String name;
+    private String name;
 
-    Long publisherCode;
+    private Long publisherCode;
 
     public Publisher(Long id, String name, Long publisherCode) {
         this.id = id;
         this.name = name;
         this.publisherCode = publisherCode;
-    }
-
-    @Id
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Long getPublisherCode() {
-        return publisherCode;
     }
 }

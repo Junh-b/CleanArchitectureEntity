@@ -4,11 +4,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Access(value= AccessType.FIELD)
 public class Page {
     @Getter
     private Long page;
@@ -21,6 +23,9 @@ public class Page {
     }
     public Page multiply(Long times) {
         return new Page(this.page * times);
+    }
+
+    private Page() {
     }
 
     public Page(Long page) {

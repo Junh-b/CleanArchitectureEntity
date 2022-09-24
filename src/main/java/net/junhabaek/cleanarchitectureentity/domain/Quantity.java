@@ -4,11 +4,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 import java.math.BigInteger;
 
 @Embeddable
+@Access(value= AccessType.FIELD)
 public class Quantity {
     @Transient
     public final static Quantity ZERO = Quantity.of(0L);
@@ -26,7 +29,7 @@ public class Quantity {
         return new Quantity(this.quantity.multiply(BigInteger.valueOf(times)));
     }
 
-    protected Quantity(){
+    private Quantity(){
         this.quantity = BigInteger.ZERO;
     }
 

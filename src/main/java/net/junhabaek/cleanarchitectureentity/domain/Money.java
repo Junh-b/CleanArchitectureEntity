@@ -2,22 +2,21 @@ package net.junhabaek.cleanarchitectureentity.domain;
 
 import lombok.Getter;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 import java.math.BigInteger;
 import java.util.Objects;
 
 @Embeddable
+@Access(value= AccessType.FIELD)
 public class Money {
     @Transient
     public final static Money ZERO = Money.of(0L);
 
     @Getter
     private final BigInteger amount;
-
-    public Money getZERO() {
-        return ZERO;
-    }
 
     @Override
     public int hashCode() {
@@ -44,7 +43,7 @@ public class Money {
         return new Money(this.amount.multiply(BigInteger.valueOf(times)));
     }
 
-    protected Money(){
+    private Money(){
         this.amount = BigInteger.ZERO;
     }
     public Money(BigInteger amount) {
