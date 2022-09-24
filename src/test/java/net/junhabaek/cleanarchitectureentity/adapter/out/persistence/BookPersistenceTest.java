@@ -21,7 +21,7 @@ public class BookPersistenceTest {
     EntityManager em;
 
     private Publisher createNewPublisher(){
-        return new Publisher(1L, "Jun", 1L);
+        return new Publisher("Jun", 1L);
     }
 
     private Book createBasicBook(Publisher publisher){
