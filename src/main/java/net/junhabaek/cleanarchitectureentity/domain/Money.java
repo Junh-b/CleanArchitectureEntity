@@ -1,8 +1,6 @@
 package net.junhabaek.cleanarchitectureentity.domain;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigInteger;
 import java.util.Objects;
@@ -11,7 +9,7 @@ public class Money {
     public static Money ZERO = Money.of(0L);
 
     @Getter
-    private BigInteger amount;
+    private final BigInteger amount;
 
     @Override
     public int hashCode() {

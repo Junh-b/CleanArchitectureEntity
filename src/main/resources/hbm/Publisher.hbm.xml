@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="net.junhabaek.cleanarchitectureentity.domain.Publisher" table="Publisher">
+        <id name="id" type="java.lang.Long" column="publisher_id" access="field">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="publisher_name" type="java.lang.String" access="field"/>
+        <property name="publisherCode" column="publisher_code" type="java.lang.Long" access="field"/>
+    </class>
+</hibernate-mapping>

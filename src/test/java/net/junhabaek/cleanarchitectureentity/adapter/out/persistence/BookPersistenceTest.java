@@ -1,9 +1,6 @@
 package net.junhabaek.cleanarchitectureentity.adapter.out.persistence;
 
-import net.junhabaek.cleanarchitectureentity.domain.Book;
-import net.junhabaek.cleanarchitectureentity.domain.Money;
-import net.junhabaek.cleanarchitectureentity.domain.Page;
-import net.junhabaek.cleanarchitectureentity.domain.Quantity;
+import net.junhabaek.cleanarchitectureentity.domain.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -21,18 +18,24 @@ public class BookPersistenceTest {
     @PersistenceContext
     EntityManager em;
 
-    private Book createBasicBook(){
+    private Publisher createNewPublisher(){
+        return new Publisher("Jun", 1L);
+    }
+
+    private Book createBasicBook(Publisher publisher){
         return Book.createNewBook("my_book", "my_author", Money.ZERO, Quantity.ZERO,
-                Page.of(1L));
+                Page.of(1L), publisher);
     }
 
     @Transactional
     @Test
     void givenValidBookObjectWithoutID_whenPersist_thenItShouldAssignIDToEntity() {
         //given
-        Book book = createBasicBook();
+        Publisher publisher = createNewPublisher();
+        Book book = createBasicBook(publisher);
 
         //when
+        em.persist(publisher);
         em.persist(book);
 
         //then
@@ -45,7 +48,9 @@ public class BookPersistenceTest {
     @Test
     void givenSavedBookObject_whenFindIt_thenItShouldHaveNonNullAttributes() {
         //given
-        Book book = createBasicBook();
+        Publisher publisher = createNewPublisher();
+        Book book = createBasicBook(publisher);
+        em.persist(publisher);
         em.persist(book);
         Long bookId = book.getId();
         em.flush();
@@ -56,5 +61,11 @@ public class BookPersistenceTest {
 
         //then
         assertNotNull(foundBook.getBookName());
+        assertNotNull(foundBook.getPublisher().getId());
+        System.out.println(foundBook.getPublisher().getId());
+
+        System.out.println("before get publisher's attribute");
+        System.out.println(foundBook.getPublisher().getName());
+        System.out.println(foundBook.getPublisher().getPublisherCode());
     }
 }

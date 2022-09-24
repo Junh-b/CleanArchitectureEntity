@@ -1,8 +1,6 @@
 package net.junhabaek.cleanarchitectureentity.domain;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
 
@@ -10,7 +8,7 @@ public class Quantity {
     public static Quantity ZERO = Quantity.of(0L);
 
     @Getter
-    private BigInteger quantity;
+    private final BigInteger quantity;
 
     public Quantity plus(Quantity other){
         return new Quantity(this.quantity.add(other.quantity));

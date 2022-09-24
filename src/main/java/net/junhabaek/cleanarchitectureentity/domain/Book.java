@@ -3,10 +3,8 @@ package net.junhabaek.cleanarchitectureentity.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter(value = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Book {
     private Long id;
@@ -15,30 +13,35 @@ public class Book {
     private Money price;
     private Quantity quantity;
     private Page page;
+    private Publisher publisher;
 
-    public static Book createNewBook(String bookName, String authorName, Money price, Quantity quantity, Page page){
+    public static Book createNewBook(String bookName, String authorName, Money price, Quantity quantity, Page page,
+                                     Publisher publisher){
         Book book = new Book();
 
-        book.setBookName(bookName);
-        book.setAuthorName(authorName);
-        book.setPrice(price);
-        book.setQuantity(quantity);
-        book.setPage(page);
+        book.bookName = bookName;
+        book.authorName = authorName;
+        book.price = price;
+        book.quantity = quantity;
+        book.page = page;
+        book.publisher = publisher;
 
         //can emit domain event here
 
         return book;
     }
 
-    public static Book restoreBook(Long id, String bookName, String authorName, Money price, Quantity quantity, Page page){
+    public static Book restoreBook(Long id, String bookName, String authorName, Money price, Quantity quantity, Page page,
+                                   Publisher publisher){
         Book book = new Book();
 
-        book.setId(id);
-        book.setBookName(bookName);
-        book.setAuthorName(authorName);
-        book.setPrice(price);
-        book.setQuantity(quantity);
-        book.setPage(page);
+        book.id = id;
+        book.bookName = bookName;
+        book.authorName = authorName;
+        book.price = price;
+        book.quantity = quantity;
+        book.page = page;
+        book.publisher = publisher;
 
         return book;
     }

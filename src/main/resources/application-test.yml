@@ -3,5 +3,6 @@ spring:
     hibernate:
       ddl-auto: create
     mapping-resources:
-      hbm/Book.hbm.xml
+      - hbm/Book.hbm.xml
+      - hbm/Publisher.hbm.xml
 

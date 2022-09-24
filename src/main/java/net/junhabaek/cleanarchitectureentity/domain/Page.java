@@ -1,15 +1,12 @@
 package net.junhabaek.cleanarchitectureentity.domain;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Page {
     @Getter
-    private Long page;
+    private final Long page;
 
     public Page plus(Page other){
         return new Page(this.page + other.page);
@@ -19,6 +16,10 @@ public class Page {
     }
     public Page multiply(Long times) {
         return new Page(this.page * times);
+    }
+
+    private Page() {
+        this.page = 0L;
     }
 
     public Page(Long page) {
