@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Access(value = AccessType.FIELD)
 @Getter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class Publisher {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="publisher_id")
